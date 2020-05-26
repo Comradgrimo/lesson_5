@@ -6,16 +6,19 @@
 #                                         Физика:   30(л)   —   10(лаб)
 #                                         Физкультура:   —   30(пр)   —
 # Пример словаря: {“Информатика”: 170, “Физика”: 40, “Физкультура”: 30}
+
+#Для выполнения этой задачи использовал регулярные выражения
+
 import re
-with open("for_task_4.txt", 'r', encoding='utf-8') as file:
+with open("for_task_6.txt", 'r', encoding='utf-8') as file:
     foo = file.readlines()
 str_ = [n.strip().split() for n in foo]             #Отсекаем пробелы переносы итд
 str_ = [str_[n][0] for n in range(len(str_))]       #оставляем только название предметов
-num = [(re.findall('\d+', i)) for i in foo]         #оставляем только цифры
+num = [(re.findall('\d+', i)) for i in foo]         #оставляем только цифры т.к цифры слеплены с (л, пр, лаб)
 
-for i in range(len(num)):                           #из строк цифры
+for i in range(len(num)):                           #из str делаем int для рассчетов
       for n in range(len(num[i])):
         num[i][n] = int(num[i][n])
-print(num)
 
-print([{str_[i]:sum(num[i])} for i in range(len(str_))])
+q = {str_[i]:sum(num[i]) for i in range(len(num))}
+print(q)
